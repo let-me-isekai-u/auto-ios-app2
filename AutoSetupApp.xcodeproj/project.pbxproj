@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A1234567890ABCDEF001 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEF000 /* AppDelegate.swift */; };
+		A1234567890ABCDEF003 /* AutoSetupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEF002 /* AutoSetupManager.swift */; };
 		A1234567890ABCDEF005 /* MainSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEF004 /* MainSettingsViewController.swift */; };
 		A1234567890ABCDEF007 /* GeneralSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEF006 /* GeneralSettingsViewController.swift */; };
 		A1234567890ABCDEF009 /* LanguageRegionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEF008 /* LanguageRegionViewController.swift */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		A1234567890ABCDEF000 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A1234567890ABCDEF002 /* AutoSetupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSetupManager.swift; sourceTree = "<group>"; };
 		A1234567890ABCDEF004 /* MainSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettingsViewController.swift; sourceTree = "<group>"; };
 		A1234567890ABCDEF006 /* GeneralSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsViewController.swift; sourceTree = "<group>"; };
 		A1234567890ABCDEF008 /* LanguageRegionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageRegionViewController.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				A1234567890ABCDEF000 /* AppDelegate.swift */,
+				A1234567890ABCDEF002 /* AutoSetupManager.swift */,
 				A1234567890ABCDEF004 /* MainSettingsViewController.swift */,
 				A1234567890ABCDEF006 /* GeneralSettingsViewController.swift */,
 				A1234567890ABCDEF008 /* LanguageRegionViewController.swift */,
@@ -154,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1234567890ABCDEF001 /* AppDelegate.swift in Sources */,
+				A1234567890ABCDEF003 /* AutoSetupManager.swift in Sources */,
 				A1234567890ABCDEF005 /* MainSettingsViewController.swift in Sources */,
 				A1234567890ABCDEF007 /* GeneralSettingsViewController.swift in Sources */,
 				A1234567890ABCDEF009 /* LanguageRegionViewController.swift in Sources */,
