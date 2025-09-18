@@ -89,5 +89,37 @@ fastlane/test_output
 
 iOSInjectionProject/
 
-# macOS
+# Codemagic
+codemagic.yaml.bak
+.codemagic/
+
+# Build artifacts
+build/
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Temporary files
+*.tmp
+*.temp
 .DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Test results
+test-results/
+coverage/

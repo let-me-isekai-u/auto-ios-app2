@@ -37,7 +37,23 @@ AutoSetupApp/
 
 ## Hướng dẫn Build IPA
 
-### Yêu cầu
+### Cách 1: Sử dụng Codemagic (Khuyến nghị cho Windows)
+
+- **Codemagic Account** (Free tier: 500 minutes/tháng)
+- **GitHub/GitLab Repository** với code
+- **Jailbreak Device** để test workflow
+
+#### Quick Start:
+1. **Push code** lên GitHub repository
+2. **Sign up** Codemagic tại https://codemagic.io
+3. **Connect** repository và chạy build
+4. **Download** IPA từ Codemagic artifacts
+5. **Install** trên jailbreak device bằng Filza
+6. **Test** workflow theo [TEST-WORKFLOW.md](TEST-WORKFLOW.md)
+
+**Xem chi tiết**: [CODEMAGIC-SETUP.md](CODEMAGIC-SETUP.md)
+
+### Cách 2: Sử dụng macOS với Xcode
 
 - **macOS** với Xcode 15.0+
 - **Apple Developer Account** ($99/năm)
@@ -153,6 +169,15 @@ private let regions = [
 
 ⚠️ **App này chỉ dành cho mục đích demo và testing**
 
+## 📚 Tài liệu bổ sung
+
+- **[CODEMAGIC-SETUP.md](CODEMAGIC-SETUP.md)** - Hướng dẫn chi tiết sử dụng Codemagic
+- **[ENVIRONMENT-VARIABLES.md](ENVIRONMENT-VARIABLES.md)** - Cấu hình biến môi trường
+- **[TEST-WORKFLOW.md](TEST-WORKFLOW.md)** - Hướng dẫn test trên jailbreak device
+- **[JAILBREAK-TESTING.md](JAILBREAK-TESTING.md)** - Hướng dẫn build cho jailbreak
+- **[MAC-USER-INSTRUCTIONS.md](MAC-USER-INSTRUCTIONS.md)** - Hướng dẫn cho Mac user
+- **[GIT-SETUP.md](GIT-SETUP.md)** - Hướng dẫn đẩy code lên Git
+
 ## Support
 
 Nếu gặp vấn đề, hãy check:
@@ -160,6 +185,8 @@ Nếu gặp vấn đề, hãy check:
 2. iOS deployment target
 3. Code signing configuration
 4. Device compatibility
+5. Codemagic build logs
+6. Environment variables setup
 
 ---
 

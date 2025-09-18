@@ -1,0 +1,117 @@
+workflows:
+  ios-build:
+    name: Auto Setup iOS App
+    max_build_duration: 60
+    instance_type: mac_mini_m1
+    environment:
+      vars:
+        # App configuration
+        APP_NAME: "AutoSetupApp"
+        BUNDLE_ID: "com.autosetup.AutoSetupApp"
+        XCODE_WORKSPACE: "AutoSetupApp.xcodeproj"
+        XCODE_SCHEME: "AutoSetupApp"
+        
+        # Build configuration
+        BUILD_CONFIGURATION: "Release"
+        EXPORT_METHOD: "development"
+        
+        # iOS configuration
+        IOS_VERSION: "12.0"
+        XCODE_VERSION: "14.0"
+        
+        # Code signing (for production builds)
+        # Uncomment and configure these for production builds
+        # APP_STORE_CONNECT_ISSUER_ID: Encrypted(...)
+        # APP_STORE_CONNECT_KEY_IDENTIFIER: Encrypted(...)
+        # APP_STORE_CONNECT_PRIVATE_KEY: Encrypted(...)
+        # CERTIFICATE_PRIVATE_KEY: Encrypted(...)
+        # CERTIFICATE_PASSPHRASE: Encrypted(...)
+        
+      xcode: latest
+      cocoapods: default
+      
+    scripts:
+      - name: Set up keychain to be used for codesigning
+        script: |
+          keychain initialize
+          
+      - name: Fetch signing files
+        script: |
+          # For jailbreak builds, we don't need code signing
+          # This step is optional and can be skipped for testing
+          echo "Skipping code signing for jailbreak build"
+          
+      - name: Install dependencies
+        script: |
+          # Install CocoaPods dependencies if needed
+          if [ -f "Podfile" ]; then
+            pod install
+          fi
+          
+      - name: Build iOS app
+        script: |
+          # Build for jailbreak (no code signing)
+          xcodebuild build \
+            -project "$XCODE_WORKSPACE" \
+            -scheme "$XCODE_SCHEME" \
+            -configuration "$BUILD_CONFIGURATION" \
+            -destination "generic/platform=iOS" \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
+            
+      - name: Archive iOS app
+        script: |
+          # Create archive for jailbreak
+          xcodebuild archive \
+            -project "$XCODE_WORKSPACE" \
+            -scheme "$XCODE_SCHEME" \
+            -configuration "$BUILD_CONFIGURATION" \
+            -destination "generic/platform=iOS" \
+            -archivePath "$CM_BUILD_DIR/AutoSetupApp.xcarchive" \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
+            
+      - name: Export iOS app
+        script: |
+          # Export IPA for jailbreak
+          xcodebuild -exportArchive \
+            -archivePath "$CM_BUILD_DIR/AutoSetupApp.xcarchive" \
+            -exportPath "$CM_BUILD_DIR" \
+            -exportOptionsPlist exportOptions.plist
+            
+      - name: Upload artifacts
+        script: |
+          # Upload IPA file
+          if [ -f "$CM_BUILD_DIR/AutoSetupApp.ipa" ]; then
+            echo "✅ IPA created successfully"
+            echo "📱 File size: $(du -h "$CM_BUILD_DIR/AutoSetupApp.ipa" | cut -f1)"
+            
+            # Upload to Codemagic artifacts
+            cp "$CM_BUILD_DIR/AutoSetupApp.ipa" "$CM_ARTIFACTS_DIR/"
+            
+            echo "📦 IPA uploaded to artifacts"
+          else
+            echo "❌ IPA creation failed"
+            exit 1
+          fi
+          
+    artifacts:
+      - "*.ipa"
+      - "*.dSYM.zip"
+      
+    publishing:
+      email:
+        recipients:
+          - your-email@example.com
+        notify:
+          success: true
+          failure: true
+          
+      # Uncomment for App Store Connect upload (production builds)
+      # app_store_connect:
+      #   auth: integration
+      #   submit_to_testflight: true
+      #   beta_groups:
+      #     - "Testers"
